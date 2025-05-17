@@ -16,6 +16,10 @@ header {
     text-align: center;
 }
 
+header h1 {
+    text-align: center;
+}
+
 main {
     display: flex;
     flex-wrap: wrap;
