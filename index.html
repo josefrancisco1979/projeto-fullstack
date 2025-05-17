@@ -1,56 +1,133 @@
  <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0d47a1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja de Roupas</title>
-  <link rel="stylesheet" href="styles.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .produto, .carrinho {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      width: 220px;
+      text-align: center;
+    }
+
+    .produto img {
+      max-width: 150px;
+      height: 150px;
+      margin-bottom: 10px;
+    }
+
+    .produto h3, .produto p {
+      margin: 5px 0;
+    }
+
+    .produto button {
+      margin-top: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .produto button:hover {
+      background-color: #0056b3;
+    }
+
+    .carrinho {
+      width: 300px;
+      text-align: left;
+    }
+
+    #itens-carrinho {
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .carrinho {
+        width: 90%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Loja de Roupas</h1>
-  </header>
+  <h1>Nossas Roupas</h1>
 
-  <main>
-    <section id="produtos" aria-labelledby="titulo-produtos">
-      <h2 id="titulo-produtos">Nossas Roupas</h2>
+  <div class="container">
+    <div class="produto">
+      <img src="./imagens/camiseta.jpg" alt="Camiseta Básica">
+      <h3>Camiseta Básica</h3>
+      <p>R$ 50,00</p>
+      <button onclick="adicionarAoCarrinho('Camiseta Básica', 50)">Adicionar ao Carrinho</button>
+    </div>
 
-      <article class="produto">
-        <img src="./imagens/camiseta.jpg" alt="Camiseta básica branca" />
-        <h3>Camiseta Básica</h3>
-        <p>R$ 50,00</p>
-        <button class="add-carrinho" data-nome="Camiseta Básica" data-preco="50">
-          Adicionar ao Carrinho
-        </button>
-      </article>
+    <div class="produto">
+      <img src="./imagens/calça.jpg" alt="Calça Jeans">
+      <h3>Calça Jeans</h3>
+      <p>R$ 120,00</p>
+      <button onclick="adicionarAoCarrinho('Calça Jeans', 120)">Adicionar ao Carrinho</button>
+    </div>
 
-      <article class="produto">
-        <img src="./imagens/calça.jpg" alt="Calça jeans azul" />
-        <h3>Calça Jeans</h3>
-        <p>R$ 120,00</p>
-        <button class="add-carrinho" data-nome="Calça Jeans" data-preco="120">
-          Adicionar ao Carrinho
-        </button>
-      </article>
+    <div class="produto">
+      <img src="./imagens/tênis.jpg" alt="Tênis Esportivo">
+      <h3>Tênis Esportivo</h3>
+      <p>R$ 200,00</p>
+      <button onclick="adicionarAoCarrinho('Tênis Esportivo', 200)">Adicionar ao Carrinho</button>
+    </div>
 
-      <article class="produto">
-        <img src="./imagens/tênis.jpg" alt="Tênis esportivo branco" />
-        <h3>Tênis Esportivo</h3>
-        <p>R$ 200,00</p>
-        <button class="add-carrinho" data-nome="Tênis Esportivo" data-preco="200">
-          Adicionar ao Carrinho
-        </button>
-      </article>
-    </section>
+    <div class="carrinho">
+      <h2>Carrinho de Compras</h2>
+      <p id="total">Total: R$ 0,00</p>
+      <div id="itens-carrinho"></div>
+    </div>
+  </div>
 
-    <aside id="carrinho" aria-labelledby="titulo-carrinho">
-      <h2 id="titulo-carrinho">Carrinho de Compras</h2>
-      <ul id="itensCarrinho" role="list"></ul>
-      <p>Total: R$ <span id="Total">0,00</span></p>
-    </aside>
-  </main>
+  <script>
+    let total = 0;
+    const carrinho = document.getElementById("itens-carrinho");
+    const totalTexto = document.getElementById("total");
 
-  <script src="main.js" defer></script>
+    function adicionarAoCarrinho(nome, preco) {
+      total += preco;
+      const item = document.createElement("p");
+      item.textContent = `${nome} - R$ ${preco.toFixed(2).replace('.', ',')}`;
+      carrinho.appendChild(item);
+      totalTexto.textContent = `Total: R$ ${total.toFixed(2).replace('.', ',')}`;
+    }
+  </script>
 </body>
 </html>
